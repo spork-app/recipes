@@ -11,7 +11,7 @@ class FoodServiceProvider extends ServiceProvider
 {
     public function register()
     {
-        Spork::addFeature('Food', 'ChunkIcon', '/food');
+        Spork::addFeature('Food', 'ChunkIcon', '/food', 'tool');
         if (config('spork.food.enabled')) {
             Route::middleware($this->app->make('config')->get('spork.food.middleware', ['web', 'auth:sanctum']))
                 ->prefix('api/food')
