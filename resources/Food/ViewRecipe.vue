@@ -22,7 +22,7 @@
                 Preparation Time: {{ preperationTime }}
             </div>
         </div>
-
+        <TrackButton event="recipe.cooked" :context="recipe" text="I made this recipe"></TrackButton>
 
         <div class="col-span-2 space-y-4"> 
             <div v-if="recipe.allergens && recipe.allergens.length > 0">
@@ -104,10 +104,11 @@
     const markdown = require('markdown-it')()
     import Generic from './Generic'
     import Ingredients from './Ingredients'
+
     export default {
         components: {
             Generic,
-            Ingredients
+            Ingredients,
         },
         data() {
             return {

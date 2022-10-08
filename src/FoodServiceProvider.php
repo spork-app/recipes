@@ -1,7 +1,7 @@
 <?php
 namespace Spork\Food;
 
-use App\Spork;
+use Spork\Core\Spork;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 use Spork\Food\Contracts\Services\HelloFreshServiceInterface;
