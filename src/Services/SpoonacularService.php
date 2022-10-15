@@ -1,7 +1,7 @@
 <?php
 namespace Spork\Food\Services;
 
-use App\Models\FeatureList;
+use Spork\Core\Models\FeatureList;
 use App\Models\User;
 use GuzzleHttp\Client;
 use Illuminate\Support\Str;
