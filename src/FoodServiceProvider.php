@@ -1,9 +1,10 @@
 <?php
+
 namespace Spork\Food;
 
-use Spork\Core\Spork;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
+use Spork\Core\Spork;
 use Spork\Food\Contracts\Services\HelloFreshServiceInterface;
 use Spork\Food\Services\HelloFreshService;
 
@@ -15,8 +16,7 @@ class FoodServiceProvider extends ServiceProvider
         if (config('spork.food.enabled')) {
             Route::middleware($this->app->make('config')->get('spork.food.middleware', ['web', 'auth:sanctum']))
                 ->prefix('api/food')
-                ->group(__DIR__ . '/../routes/web.php');
-
+                ->group(__DIR__.'/../routes/web.php');
         }
         $this->app->bind(HelloFreshServiceInterface::class, HelloFreshService::class);
     }

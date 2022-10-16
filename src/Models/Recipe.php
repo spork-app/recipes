@@ -8,7 +8,7 @@ use Laravel\Scout\Searchable;
 
 /**
  * Class Recipe
- * @package App
+ *
  * @mixin Model
  */
 class Recipe extends Model
@@ -39,18 +39,18 @@ class Recipe extends Model
         'clonedFrom',
         'canonical',
         'canonicalLink',
-        'yields'
+        'yields',
     ];
 
     public function scopeAllUsable($query)
     {
         $query->with([
-                'ingredients',
-                'wines',
-                'steps',
-                'utensils',
-                'allergens',
-            ])
+            'ingredients',
+            'wines',
+            'steps',
+            'utensils',
+            'allergens',
+        ])
             ->has('steps')
             ->has('ingredients');
     }
@@ -79,11 +79,11 @@ class Recipe extends Model
     {
         return $this->belongsToMany(Ingredient::class, 'recipe_ingredients')->withPivot([
             'amount',
-            'unit'
+            'unit',
         ]);
     }
 
-    public  function cuisines()
+    public function cuisines()
     {
         return $this->belongsToMany(Cuisine::class, 'recipe_cuisines');
     }
@@ -95,17 +95,17 @@ class Recipe extends Model
                 $query->select([
                     'displayName',
                     'classification',
-                    'type'
+                    'type',
                 ]);
             },
-            'utensils' => function($query) {
+            'utensils' => function ($query) {
                 $query->select('type');
             },
-            'allergens' => function($query) {
+            'allergens' => function ($query) {
                 $query->select('type');
             },
         ]);
+
         return Arr::except(collect($this->toArray())->filter()->toArray(), ['steps']);
     }
-
 }

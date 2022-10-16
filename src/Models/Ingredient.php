@@ -7,12 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class Ingredient
- * @package App
+ *
  * @property Collection $family
  */
 class Ingredient extends Model
 {
     public $incrementing = false;
+
     public $fillable = [
         'id',
         'type',

@@ -9,6 +9,6 @@ class Cuisine extends Model
     public $incrementing = false;
 
     public $fillable = [
-        'id', 'name', 'type', 'slug', 'description', 'imageLink'
+        'id', 'name', 'type', 'slug', 'description', 'imageLink',
     ];
 }

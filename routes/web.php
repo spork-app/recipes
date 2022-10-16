@@ -18,11 +18,11 @@ Route::get('/recipes/{slug}', function (Request $request, $slug) {
 });
 
 Route::post('/search', function (Request $request) {
-    if (!$request->hasAny(['query', 'allergies', 'pairs', 'ingredients', 'difficulty', 'prepTime',])) {
+    if (! $request->hasAny(['query', 'allergies', 'pairs', 'ingredients', 'difficulty', 'prepTime'])) {
         return response()->redirectTo('/api/food/recipes');
     }
 
-    $httpQuery = $request->get('query') ?? $request->get('prepTime') ?? 'difficulty ' . $request->get('difficulty');
+    $httpQuery = $request->get('query') ?? $request->get('prepTime') ?? 'difficulty '.$request->get('difficulty');
 
     $query = Recipe::search($httpQuery);
 
@@ -67,24 +67,24 @@ Route::get('recipes', function () {
     $page = max(1, min(100, request()->get('page', 1)));
     $limit = request()->get('limit', 9);
 
-    return cache()->remember('food-recipies.'.$page.$limit, now()->addHour(),fn() => Recipe::allUsable()
+    return cache()->remember('food-recipies.'.$page.$limit, now()->addHour(), fn () => Recipe::allUsable()
         ->inRandomOrder()
         ->paginate($limit, ['*'], 'page', $page));
 });
 Route::get('allergens', function () {
-    return cache()->remember('allergens', now()->addHour(), fn() => Spork\Food\Models\Allergen::all());
+    return cache()->remember('allergens', now()->addHour(), fn () => Spork\Food\Models\Allergen::all());
 });
-Route::get('wine-attributes', function () {        
-    return cache()->remember('wine-attributes', now()->addHour(),fn() => Attribute::all());
+Route::get('wine-attributes', function () {
+    return cache()->remember('wine-attributes', now()->addHour(), fn () => Attribute::all());
 });
 
-Route::get('ingredient-families', function () {        
-    return cache()->remember('ingredient-families', now()->addHour(), fn() => Family::all());
+Route::get('ingredient-families', function () {
+    return cache()->remember('ingredient-families', now()->addHour(), fn () => Family::all());
 });
 
 Route::get('prep-times', function () {
     return cache()->remember('prep-times', now()->addHour(), function () {
-         /** @var array $items */
+        /** @var array $items */
         $items = Recipe::selectRaw('prepTime as time')
             ->distinct()
             ->whereNotNull('prepTime')

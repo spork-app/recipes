@@ -6,11 +6,10 @@ use App\Http\Controllers\Controller;
 
 class MealPlanCrudController extends Controller
 {
-
     public function destroy()
     {
-
     }
+
     public function store()
     {
         $this->validate(request(), [

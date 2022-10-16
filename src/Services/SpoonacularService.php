@@ -1,33 +1,33 @@
 <?php
+
 namespace Spork\Food\Services;
 
-use Spork\Core\Models\FeatureList;
 use App\Models\User;
 use GuzzleHttp\Client;
 use Illuminate\Support\Str;
+use Spork\Core\Models\FeatureList;
 
 class SpoonacularService
 {
     protected const API_URL = 'https://api.spoonacular.com/';
 
     public function __construct(
-        protected ?Client $client =  null,
+        protected ?Client $client = null,
         protected ?User $user = null
     ) {
         $this->client = $client ?? new Client();
         $this->user = $user ?? auth()->user();
     }
 
-
     protected function getUser()
     {
         $user = FeatureList::forFeature('food')->where('user_id', $this->user->id)->first();
 
-        if (empty ($user)) {
+        if (empty($user)) {
             $user = new FeatureList();
             $user->feature = 'food';
             $user->settings = [
-                'auth' => $this->connectUser($this->user)
+                'auth' => $this->connectUser($this->user),
             ];
             $user->save();
         }
@@ -41,7 +41,7 @@ class SpoonacularService
             'json' => [
                 'username' => strtolower(Str::snake($user->name, '')),
                 'email' => $user->email,
-            ]
+            ],
         ]);
 
         $response = json_decode($response->getBody()->getContents());
@@ -50,12 +50,13 @@ class SpoonacularService
     }
 
     // Use guzzle to query the spoonacular API
-    public function request(string $url, )
+    public function request(string $url)
     {
         $client = new \GuzzleHttp\Client();
         $response = $client->request('GET', $query);
         $response = $response->getBody();
         $response = json_decode($response, true);
+
         return $response;
     }
 }

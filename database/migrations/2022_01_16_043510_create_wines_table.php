@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class CreateWinesTable extends Migration
 {
@@ -49,7 +49,6 @@ class CreateWinesTable extends Migration
             $table->string('name');
             $table->timestamps();
         });
-
     }
 
     /**
@@ -63,6 +62,5 @@ class CreateWinesTable extends Migration
         Schema::dropIfExists('wine_attributes');
         Schema::dropIfExists('attributes');
         Schema::dropIfExists('wine_flavors');
-
     }
 }

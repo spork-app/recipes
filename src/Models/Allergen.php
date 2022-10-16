@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Allergen extends Model
 {
     public $incrementing = false;
+
     public $fillable = [
         'id',
         'type',
