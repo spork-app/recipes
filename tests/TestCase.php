@@ -4,7 +4,7 @@ namespace Spork\Food\Tests;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Orchestra\Testbench\TestCase as TestbenchTestCase;
-use Spork\Food\FoodServiceProvider.php;
+use Spork\Food\FoodServiceProvider;
 
 class TestCase extends TestbenchTestCase
 {
@@ -20,7 +20,7 @@ class TestCase extends TestbenchTestCase
     protected function getPackageProviders($app)
     {
         return [
-            FoodServiceProvider.php::class,
+            FoodServiceProvider::class,
         ];
     }
 }
